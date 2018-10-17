@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Getting Started: Serving Web Content</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script  type="text/javascript">
+            $(document).ready(function () {
+                var buyDate = "";
+                var sellDate = "";
+                var amount = "";
+                $("#buyDate").change(function () {
+                    buyDate = this.value
+                })
+                $("#sellDate").change(function () {
+                    sellDate = this.value
+                })
+                $("#amountInput").change(function () {
+                    amount = this.value
+                })
+                $("#getButton").click(function () {
+                    if (buyDate && sellDate && amount) {
+                        $.get("profit?buy=" + buyDate + "&sell=" + sellDate + "&amount=" + amount, function (data) {
+                            $("#result").html(data)
+                        });
+                    }
+                })
+            })
+        </script>
+        <style type="text/css">
+            #outer, body, html {
+                width: 100%;
+                height: 100%;
+                text-align: center;
+            }
+            #inner {
+                display: inline-block;
+                padding-top: 200px;
+            }
+        </style>
+    </head>
+    <body>
+    <div id="outer">
+        <div id="inner">
+            <p>Buy:</p>
+            <input type="date" id="buyDate">
+            <p>Sell:</p>
+            <input type="date" id="sellDate">
+            <p>Amount:</p>
+            <input type="number" id="amountInput">
+            <p/>
+            <button id="getButton">Calculate</button>
+            <p id="result"></p>
+        </div>
+    </div>
+    </body>
+</html>
